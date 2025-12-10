@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>{{meta_title}}</title>
+  {{ghost_head}}
+
+  <style>
+    :root { --bg:#fff; --fg:#000; --muted:#666; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      padding:24px;
+      background:var(--bg);
+      color:var(--fg);
+      font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;
+      font-size:12px;
+      line-height:1.45
+    }
+    .desktop{
+      position:relative;
+      width:100%;
+      height:calc(100vh - 48px)
+    }
+    .folder{
+      position:absolute;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:.4rem;
+      cursor:pointer;
+      text-align:center;
+      text-decoration:none;
+      color:inherit
+    }
+    .folder .emoji{
+      font-size:3rem;
+      line-height:1;
+      transition:transform .08s ease
+    }
+    .folder .label{
+      font-size:12px
+    }
+    .folder:hover .emoji{
+      transform:translateY(-2px)
+    }
+    .hint{
+      position:fixed;
+      bottom:12px;
+      left:12px;
+      color:var(--muted);
+      font-size:11px
+    }
+    @media (max-width:640px){
+      body{padding:16px}
+      .desktop{height:auto;min-height:70vh}
+      .folder{
+        position:static;
+        display:inline-flex;
+        margin:10px 16px 0 0
+      }
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .overlay.hidden {
+      display: none;
+    }
+
+    .modal {
+      background: #fff;
+      border: 1px solid #000;
+      padding: 14px 16px 16px;
+      max-width: 420px;
+      width: calc(100% - 48px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      font-size: 12px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .modal-header .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid #000;
+    }
+
+    .modal-header .dot.red { background: #ff5f57; }
+    .modal-header .dot.yellow { background: #ffbd2e; }
+    .modal-header .dot.green { background: #28c840; }
+
+    .modal-title {
+      margin-left: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .modal-close {
+      margin-left: auto;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .modal-body {
+      font-size: 14px;
+    }
+
+    .modal-text {
+      margin: 0 0 10px 0;
+    }
+
+    .newsletter-embed {
+      margin-bottom: 10px;
+    }
+
+    .newsletter-embed form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .newsletter-embed input[type="email"] {
+      flex: 1;
+      min-width: 180px;
+      padding: 6px 8px;
+      border: 1px solid #000;
+      font-family: inherit;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .newsletter-embed button {
+      padding: 6px 10px;
+      border: 1px solid #000;
+      background: #000;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .newsletter-embed button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .modal-footnote {
+      margin: 0;
+      color: #666;
+      font-size: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .modal {
+        width: 100%;
+        margin: 0 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop">
+    <a class="folder" style="top:20%;left:22%" href="/inapoi.html" data-feature="inapoiAcasa">
+      <div class="emoji">📁</div>
+      <div class="label">înapoi acasă</div>
+    </a>
+    
+    <a class="folder" style="top:72%;left:40%" href="/stefan-mako.html" data-feature="despre">
+      <div class="emoji">📁</div>
+      <div class="label">despre</div>
+    </a>
+
+    <a class="folder" style="top:56%;left:62%" href="/muzici.html" data-feature="muzici">
+      <div class="emoji">📁</div>
+      <div class="label">muzici</div>
+    </a>
+
+    <a class="folder" style="top:35%;left:8%" href="/sustine.html" data-feature="sustine">
+      <div class="emoji">📁</div>
+      <div class="label">susține-mă</div>
+    </a>
+    <a class="folder" style="top:72%;left:8%" href="/texte/">
+      <div class="emoji">📁</div>
+      <div class="label">texte</div>
+    </a>
+
+    <a class="folder" style="top:60%;left:8%" href="https://makoff.gumroad.com/subscribe" data-feature="abonare" target="_blank" rel="noopener">
+      <div class="emoji">📁</div>
+      <div class="label">abonare</div>
+    </a>
+
+    <a
+      class="folder"
+      id="folder-inspatiu"
+      style="top:24%;left:48%"
+      href="/despre-isnan.html"
+      data-feature="inSpatiu"
+    >
+      <div class="emoji">📁</div>
+      <div class="label">în spațiu nu se aude nimic</div>
+    </a>
+  
+    <a class="folder" style="top:48%;left:18%" href="/celalalta-viata.html" data-feature="celalaltaViata">
+      <div class="emoji">📁</div>
+      <div class="label">cealaltă viață</div>
+    </a>
+  </div>
+
+  <div class="hint">tip: click pe un folder ca să intri</div>
+
+  <div id="newsletter-overlay" class="overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <span class="modal-title">makobook pro - în spațiu nu se aude nimic</span>
+        <button class="modal-close" type="button" data-close-modal>×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-text">
+          abonează-te și primești gratuit primele capitole pe mail.
+        </p>
+        <div class="newsletter-embed">
+          <form action="https://gumroad.com/follow_from_embed_form" method="post" id="gumroad-follow-form-embed">
+            <input type="hidden" name="seller_id" value="1366692181946" />
+            <input
+              id="gumroad-follow-form-embed-input"
+              type="email"
+              name="email"
+              placeholder="..."
+              required
+            />
+            <button type="submit" id="gumroad-follow-form-embed-button">
+              mă abonez
+            </button>
+          </form>
+        </div>
+
+        <p class="modal-footnote">(nu uita să confirmi pe mail, altfel nu primești nimic)</p>
+      </div>
+    </div>
+  </div>
+
+  {{ghost_foot}}
+
+  <script src="https://gumroad.com/js/gumroad.js"></script>
+  <script>
+    const FEATURES = {
+      inapoiAcasa: false,
+      sustine: true,
+      abonare: true,
+      inSpatiu: true,
+      muzici: false,
+      film: false,
+      celalaltaViata: false,
+      despre: true
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-feature]').forEach(el => {
+        const key = el.getAttribute('data-feature');
+        if (!FEATURES[key]) el.style.display = 'none';
+      });
+
+      const abonareLink = document.querySelector('[data-feature="abonare"]');
+      const overlay = document.getElementById('newsletter-overlay');
+
+      if (overlay) {
+        overlay.classList.remove('hidden');
+
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay || e.target.closest('[data-close-modal]')) {
+            overlay.classList.add('hidden');
+          }
+        });
+      }
+
+      if (abonareLink && overlay) {
+        abonareLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          overlay.classList.remove('hidden');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
