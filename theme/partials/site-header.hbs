@@ -1,0 +1,23 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="brand">
+      <a class="brand__name" href="{{@site.url}}">{{@site.title}}</a>
+      {{#if @site.description}}
+        <div class="brand__tag">{{@site.description}}</div>
+      {{/if}}
+    </div>
+
+    <nav class="nav" aria-label="primary">
+  <div class="nav__left">
+    <a class="nav__link" href="https://www.makoff.ro">acasă</a>
+    <a class="nav__link" href="/scris/">texte</a>
+    <a class="nav__link" href="/stefan-mako/">despre</a>
+    <a class="nav__link" href="/sustine/">susține-mă</a>
+    <a class="nav__link nav__link--outline" href="https://www.makoff.ro/#/portal/signup/free" onclick="window.location.href=(window.location.origin + '/#/portal/signup/free'); return false;">abonare</a>
+  </div>
+  <div class="nav__right">
+    <a class="nav__link nav__link--outline nav__link--makonat" href="https://www.makoff.ro/#/portal" onclick="window.location.href=(window.location.origin + '/#/portal'); return false;">makonat</a>
+  </div>
+</nav>
+  </div>
+</header>

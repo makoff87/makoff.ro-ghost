@@ -1,0 +1,24 @@
+{{!< default}}
+
+<div class="window">
+  <div class="titlebar">
+    <div class="title">barefoot</div>
+    <div class="actions"><a href="/mens-sana-corpore-sano/">←</a> <a href="/">×</a></div>
+  </div>
+  <div class="content">
+    <div class="collection-list">
+      {{#foreach posts}}
+        {{> "collection-item"}}
+      {{else}}
+        <div class="empty-newsletter-cta">
+          <p>încă nu sunt texte aici. între timp, te poți abona la newsletterele tematice.</p>
+          <a class="gh-button gh-button-primary" href="#/portal/signup" data-portal="signup">mă abonez</a>
+        </div>
+      {{/foreach}}
+    </div>
+
+    {{#if pagination.pages}}
+      <div class="pagination">{{pagination}}</div>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,54 @@
+routes:
+  /:
+    template: home
+
+  /scris/:
+    template: page-scris
+
+  /carti/:
+    template: page-carti
+
+  /mens-sana-corpore-sano/:
+    template: page-mens-sana-corpore-sano
+
+  /sustine/:
+    template: page-sustine
+
+  /abonare/:
+    template: page-abonare
+
+  /stefan-mako/:
+    template: page-stefan-mako
+
+  /despre-isnan/:
+    template: page-despre-isnan
+
+  /texte/:
+    controller: channel
+    template: page-texte
+    filter: tag:texte
+
+collections:
+  /barefoot/:
+    permalink: /barefoot/{slug}/
+    template: page-barefoot
+    filter: tag:barefoot
+
+  /plant-based/:
+    permalink: /plant-based/{slug}/
+    template: page-plant-based
+    filter: tag:plant-based
+
+  /cealalta-viata/:
+    permalink: /cealalta-viata/{slug}/
+    template: page-cealalta-viata
+    filter: tag:cealalta-viata
+
+  /in-spatiu/:
+    permalink: /in-spatiu/{slug}/
+    template: page-isnan
+    filter: tag:isnan
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

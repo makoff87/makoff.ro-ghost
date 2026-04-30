@@ -1,0 +1,22 @@
+{{!< default}}
+
+<div class="window">
+  <div class="titlebar">
+    <div class="title">cealaltă viață</div>
+    <div class="actions"><a href="/scris/">←</a> <a href="/">×</a></div>
+  </div>
+
+  <div class="content">
+    <div class="collection-list">
+      {{#foreach posts}}
+        {{> "collection-item"}}
+      {{else}}
+        <p class="meta">nu e nimic aici încă.</p>
+      {{/foreach}}
+    </div>
+
+    {{#if pagination.pages}}
+      <div class="pagination">{{pagination}}</div>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,139 @@
+{{!< default}}
+
+<style>
+.home-template .site-main{padding:0 !important;}
+.home-template .site{min-height:100vh;}
+.home-template .site-header{
+  position:fixed;
+  top:calc(var(--gh-announcement-height, 0px) + var(--makoff-announcement-height, 0px));
+  left:0;
+  right:0;
+  z-index:50;
+}
+.home-template .site-footer{position:fixed; bottom:0; left:0; right:0; z-index:40;}
+.home-template .site-footer__inner{padding:8px 14px;}
+.home-template .site-header__inner{padding:8px 14px;}
+.home-template .brand__tag{opacity:.55;}
+.home-template .nav{gap:10px;}
+.home-template .nav__link--cta{padding:3px 8px; font-size:12px;}
+.home-template .home-shell{
+  min-height:calc(100vh - var(--makoff-announcement-height, 0px));
+  padding:18px 14px 26px;
+  padding-top:calc(26px + var(--gh-announcement-height, 0px));
+  background:#fff;
+  color:#000;
+  font-family:ui-monospace, Menlo, Consolas, "Courier New", monospace;
+  font-size:12px;
+  line-height:1.45;
+}
+.home-template .desktop{
+  position:relative;
+  width:100%;
+  height:calc(100vh - 52px - var(--gh-announcement-height, 0px) - var(--makoff-announcement-height, 0px));
+  min-height:520px;
+}
+.home-template .folder{
+  position:absolute;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.4rem;
+  width:150px;
+  max-width:150px;
+  color:inherit;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+  user-select:none;
+}
+.home-template .folder .emoji{
+  font-size:3rem;
+  line-height:1;
+  transition:transform .08s ease;
+}
+.home-template .folder:hover .emoji{transform:translateY(-2px);}
+.home-template .folder .label{
+  max-width:150px;
+  font-size:14px;
+  line-height:1.2;
+  overflow-wrap:anywhere;
+}
+
+@media (max-width:640px){
+  .home-template .site-header{
+    position:sticky;
+    top:calc(var(--gh-announcement-height, 0px) + var(--makoff-announcement-height, 0px));
+  }
+  .home-template .site-footer{position:static;}
+  .home-template .site-main{padding:0 !important;}
+  .home-template .home-shell{
+    min-height:auto;
+    padding:18px 14px 22px !important;
+  }
+  .home-template .desktop{
+    height:auto;
+    min-height:0;
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:20px 14px;
+    padding:14px 0 0;
+    align-items:start;
+    justify-items:center;
+  }
+  .home-template .folder{
+    position:static !important;
+    width:100%;
+  }
+  .home-template .folder .emoji{font-size:2.8rem;}
+}
+</style>
+
+<div class="home-shell">
+  <div class="desktop">
+
+    <a class="folder" id="folder-abonare" style="top:60%;left:8%" href="{{@site.url}}/#/portal/signup/free" onclick="window.location.href=(window.location.origin + '/#/portal/signup/free'); return false;">
+      <div class="emoji">📁</div>
+      <div class="label">abonare</div>
+    </a>
+    
+    <a class="folder" style="top:72%;left:40%" href="/stefan-mako/" data-feature="despre">
+      <div class="emoji">📁</div>
+      <div class="label">despre</div>
+    </a>
+
+    <a class="folder" style="top:56%;left:62%" href="/carti/" data-feature="muzici">
+      <div class="emoji">📁</div>
+      <div class="label">cărți</div>
+    </a>
+
+    <a class="folder" style="top:35%;left:8%" href="/sustine/" data-feature="sustine">
+      <div class="emoji">📁</div>
+      <div class="label">susține-mă</div>
+    </a>
+    <a class="folder" style="top:72%;left:8%" href="/scris/">
+      <div class="emoji">📁</div>
+      <div class="label">scris</div>
+    </a>
+
+    <a
+      class="folder"
+      id="folder-inspatiu"
+      style="top:24%;left:48%"
+      href="https://www.makoff.ro/in-spatiu/"
+      data-feature="inSpatiu"
+    >
+      <div class="emoji">📁</div>
+      <div class="label">în spațiu nu se aude nimic</div>
+    </a>
+  
+    <a class="folder" style="top:48%;left:18%" href="/cealalta-viata/" data-feature="celalaltaViata">
+      <div class="emoji">📁</div>
+      <div class="label">cealaltă viață</div>
+    </a>
+
+    <a class="folder" style="top:36%;left:72%" href="/mens-sana-corpore-sano/" data-feature="mensSanaCorporeSano">
+      <div class="emoji">📁</div>
+      <div class="label">MENS SANA/CORPORE SANO</div>
+    </a>
+  </div>
+</div>

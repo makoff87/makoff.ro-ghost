@@ -1,0 +1,165 @@
+{{!< default}}
+
+{{#post}}
+<div class="reader-mode" id="reader-container">
+    <div class="reader-toolbar">
+        <div class="reader-controls">
+            <button id="toggle-font" title="Schimbă Font">Font: Lexend (Dislexici)</button>
+            <button id="increase-font" title="Mărește textul">A+</button>
+            <button id="decrease-font" title="Micșorează textul">A-</button>
+        </div>
+        <div class="reader-actions">
+            <a href="/" class="btn-close">× Închide</a>
+        </div>
+    </div>
+    
+    <div class="reader-main">
+        <h1 class="reader-title">{{title}}</h1>
+        <div class="reader-meta">
+            {{#if custom_excerpt}}<div>{{custom_excerpt}}</div>{{/if}}
+            <time>{{#has tag="isnan"}}2026{{else}}{{date format="DD MMM YYYY"}}{{/has}}</time>
+        </div>
+        <hr class="reader-hr" />
+        <article class="post reader-content">
+            {{content}}
+        </article>
+    </div>
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&family=Merriweather:wght@400;700&display=swap');
+
+.reader-mode {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    font-family: 'Lexend', sans-serif;
+    color: #1a1a1a;
+    font-size: 18px;
+    line-height: 1.8;
+    background: #fdfdfd;
+    min-height: 100vh;
+}
+
+.reader-mode.font-serif {
+    font-family: 'Merriweather', serif;
+}
+
+.reader-mode.text-sm { font-size: 16px; }
+.reader-mode.text-md { font-size: 18px; }
+.reader-mode.text-lg { font-size: 22px; }
+.reader-mode.text-xl { font-size: 26px; }
+
+.reader-toolbar {
+    position: sticky;
+    top: 0;
+    background: #fdfdfd;
+    padding: 15px 0;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    margin-bottom: 40px;
+}
+
+.reader-controls, .reader-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.reader-toolbar button, .reader-toolbar a {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'Lexend', sans-serif;
+}
+
+.reader-toolbar button:hover, .reader-toolbar a:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
+}
+
+.reader-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.reader-meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.reader-hr {
+    border: 0;
+    height: 1px;
+    background: #eaeaea;
+    margin: 30px 0;
+}
+
+.reader-content p {
+    margin-bottom: 1.5em;
+}
+
+.reader-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('reader-container');
+    const btnFont = document.getElementById('toggle-font');
+    const btnInc = document.getElementById('increase-font');
+    const btnDec = document.getElementById('decrease-font');
+    
+    if (!container || !btnFont || !btnInc || !btnDec) return;
+    
+    let isDyslexic = true;
+    let sizeIndex = 1;
+    const sizes = ['text-sm', 'text-md', 'text-lg', 'text-xl'];
+    
+    container.classList.add(sizes[sizeIndex]);
+    
+    btnFont.addEventListener('click', () => {
+        isDyslexic = !isDyslexic;
+        if (isDyslexic) {
+            container.classList.remove('font-serif');
+            btnFont.innerText = 'Font: Lexend (Dislexici)';
+        } else {
+            container.classList.add('font-serif');
+            btnFont.innerText = 'Font: Serif Clasic';
+        }
+    });
+    
+    btnInc.addEventListener('click', () => {
+        if (sizeIndex < sizes.length - 1) {
+            container.classList.remove(sizes[sizeIndex]);
+            sizeIndex++;
+            container.classList.add(sizes[sizeIndex]);
+        }
+    });
+    
+    btnDec.addEventListener('click', () => {
+        if (sizeIndex > 0) {
+            container.classList.remove(sizes[sizeIndex]);
+            sizeIndex--;
+            container.classList.add(sizes[sizeIndex]);
+        }
+    });
+});
+</script>
+{{/post}}

@@ -1,0 +1,62 @@
+{{!< default}}
+
+{{#post}}
+<article class="gh-article {{post_class}}">
+  <header class="gh-header gh-canvas">
+    <div class="gh-post-meta">
+      <time datetime="{{date format="YYYY-MM-DD"}}">{{#has tag="isnan"}}2026{{else}}{{date format="DD MMM YYYY"}}{{/has}}</time>
+      {{#if primary_tag}}
+        <span>{{primary_tag.name}}</span>
+      {{/if}}
+    </div>
+
+    <h1 class="gh-title">{{title}}</h1>
+
+    {{#if custom_excerpt}}
+      <p class="gh-excerpt">{{custom_excerpt}}</p>
+    {{/if}}
+
+    {{#if feature_image}}
+      <figure class="gh-feature-image">
+        <img src="{{feature_image}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+        {{#if feature_image_caption}}
+          <figcaption>{{feature_image_caption}}</figcaption>
+        {{/if}}
+      </figure>
+    {{/if}}
+  </header>
+
+  <div class="gh-content gh-canvas">
+    {{#if access}}
+      {{content}}
+    {{else}}
+      {{!-- Members-only: show a short preview + signup CTA --}}
+      {{#if custom_excerpt}}
+        <p>{{custom_excerpt}}</p>
+      {{else}}
+        <p>{{excerpt words="70"}}</p>
+      {{/if}}
+
+      <div class="paywall">
+        {{#if @member}}
+          <p class="paywall__text">acest text nu este încă disponibil pentru abonamentele gratuite. mai așteaptă câteva săptămâni sau abonează-te pentru acces instant.</p>
+          <div class="paywall__actions">
+            <a class="gh-button gh-button-primary" href="#/portal/signup" data-portal="signup">mă abonez</a>
+          </div>
+        {{else}}
+          <p class="paywall__text">abonează-te gratuit și începe lectura.</p>
+          <div class="paywall__actions">
+            <a class="gh-button gh-button-primary" href="{{@site.url}}/#/portal/signup/free" onclick="window.location.href=(window.location.origin + '/#/portal/signup/free'); return false;">mă abonez gratuit</a>
+            <a class="gh-button" href="#/portal/signin" data-portal="signin">am abonament</a>
+          </div>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+
+  {{!-- Comments (if enabled in Ghost settings) --}}
+  <section class="gh-post-comments gh-canvas">
+    {{comments}}
+  </section>
+</article>
+{{/post}}
