@@ -1,5 +1,6 @@
 node_modules/
 .npm-cache/
+.ghost-local/
 *.zip
 .DS_Store
 npm-debug.log*

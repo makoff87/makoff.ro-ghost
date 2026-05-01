@@ -1,15 +1,156 @@
 {{!< default}}
 
+{{!-- Replace these two values when the final PDF and Stripe Payment Link are ready. --}}
+<script>
+  window.makoffIsnanDownload = {
+    pdfUrl: "{{asset "downloads/in-spatiu-nu-se-aude-nimic.pdf"}}",
+    stripeUrl: "https://donate.stripe.com/cNi7sLdSt9XLaZf6U82ZO02"
+  };
+</script>
+
 <div class="window">
   <div class="titlebar">
     <div class="title">în spațiu nu se aude nimic</div>
     <div class="actions"><a href="/carti/">←</a> <a href="/">×</a></div>
   </div>
   <div class="content">
-    <div class="post">
-      <h1 style="font-size:14px;margin:0 0 12px 0;">despre carte</h1>
-      <p>romanul e publicat serial (capitole) și va exista și ca ebook. aici ai pagina de context și intrarea în capitole.</p>
-      <p><a href="/in-spatiu/">→ citește capitolele</a></p>
+    <div class="book-hub">
+      <div class="book-hub__intro">
+        <h1>în spațiu nu se aude nimic</h1>
+        <p>romanul poate fi citit online, pe capitole, sau descărcat direct ca PDF.</p>
+      </div>
+
+      <div class="book-hub__actions">
+        <a class="book-hub__button book-hub__button--primary" href="{{asset "downloads/in-spatiu-nu-se-aude-nimic.pdf"}}" data-book-download download>
+          descarcă PDF
+        </a>
+        <a class="book-hub__button" href="/in-spatiu/">
+          citește online
+        </a>
+        <a class="book-hub__button" href="{{@site.url}}/#/portal/signup/free" onclick="window.location.href=(window.location.origin + '/#/portal/signup/free'); return false;">
+          abonare gratuită
+        </a>
+      </div>
+
+      <p class="book-hub__note" data-book-download-note>
+        după descărcare, dacă vrei să susții munca mea, poți să plătești cât vrei, dacă vrei. abonează-te gratuit ca să rămâi la curent cu proiectele mele. și dacă vrei să mă sprijini constant, alege un abonament plătit din secțiunea „makonat”.
+      </p>
     </div>
   </div>
 </div>
+
+<style>
+  .book-hub{
+    max-width:640px;
+    margin:38px auto 52px;
+  }
+
+  .book-hub__intro h1{
+    margin:0 0 12px;
+    font-size:28px;
+    line-height:1.1;
+    letter-spacing:0;
+  }
+
+  .book-hub__intro p,
+  .book-hub__note{
+    margin:0;
+    color:rgba(0,0,0,.68);
+    font-size:15px;
+    line-height:1.5;
+  }
+
+  .book-hub__actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:24px 0 12px;
+  }
+
+  .book-hub__button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:42px;
+    padding:0 16px;
+    border:1px solid rgba(0,0,0,.34);
+    border-radius:8px;
+    background:#fff;
+    color:#111;
+    font-size:14px;
+    font-weight:600;
+    line-height:1;
+    text-decoration:none;
+  }
+
+  .book-hub__button:hover{
+    background:rgba(0,0,0,.04);
+  }
+
+  .book-hub__button--primary{
+    border-color:#111;
+    background:#111;
+    color:#fff;
+  }
+
+  .book-hub__button--primary:hover{
+    background:#000;
+  }
+
+  @media (max-width:560px){
+    .book-hub{margin:18px auto 30px;}
+    .book-hub__actions{display:grid;}
+    .book-hub__button{width:100%;}
+  }
+</style>
+
+<script>
+  (function () {
+    var button = document.querySelector("[data-book-download]");
+    var note = document.querySelector("[data-book-download-note]");
+    var config = window.makoffIsnanDownload || {};
+
+    if (!button) {
+      return;
+    }
+
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      var pdfUrl = config.pdfUrl || button.getAttribute("href");
+      var stripeUrl = config.stripeUrl;
+
+      if (!pdfUrl) {
+        if (note) {
+          note.textContent = "PDF-ul nu este încă legat.";
+        }
+        return;
+      }
+
+      var download = document.createElement("a");
+      download.href = pdfUrl;
+      download.download = "in-spatiu-nu-se-aude-nimic.pdf";
+      download.style.display = "none";
+      document.body.appendChild(download);
+      download.click();
+      download.remove();
+
+      button.textContent = "se descarcă...";
+
+      if (!stripeUrl) {
+        if (note) {
+          note.textContent = "descărcarea a pornit. lipsește doar linkul Stripe pentru pasul următor.";
+        }
+        return;
+      }
+
+      if (note) {
+        note.textContent = "descărcarea a pornit. te trimit acum pe Stripe.";
+      }
+
+      window.setTimeout(function () {
+        window.location.href = stripeUrl;
+      }, 1500);
+    });
+  })();
+</script>

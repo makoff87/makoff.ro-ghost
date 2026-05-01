@@ -27,31 +27,7 @@
   </header>
 
   <div class="gh-content gh-canvas">
-    {{#if access}}
-      {{content}}
-    {{else}}
-      {{!-- Members-only: show a short preview + signup CTA --}}
-      {{#if custom_excerpt}}
-        <p>{{custom_excerpt}}</p>
-      {{else}}
-        <p>{{excerpt words="70"}}</p>
-      {{/if}}
-
-      <div class="paywall">
-        {{#if @member}}
-          <p class="paywall__text">acest text nu este încă disponibil pentru abonamentele gratuite. mai așteaptă câteva săptămâni sau abonează-te pentru acces instant.</p>
-          <div class="paywall__actions">
-            <a class="gh-button gh-button-primary" href="#/portal/signup" data-portal="signup">mă abonez</a>
-          </div>
-        {{else}}
-          <p class="paywall__text">abonează-te gratuit și începe lectura.</p>
-          <div class="paywall__actions">
-            <a class="gh-button gh-button-primary" href="{{@site.url}}/#/portal/signup/free" onclick="window.location.href=(window.location.origin + '/#/portal/signup/free'); return false;">mă abonez gratuit</a>
-            <a class="gh-button" href="#/portal/signin" data-portal="signin">am abonament</a>
-          </div>
-        {{/if}}
-      </div>
-    {{/if}}
+    {{content}}
   </div>
 
   {{!-- Comments (if enabled in Ghost settings) --}}

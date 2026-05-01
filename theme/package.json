@@ -2,7 +2,7 @@
     "name": "makoff-ro-ghost",
     "description": "Custom Ghost theme for makoff.ro",
     "demo": "https://makoff.ro",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "engines": {
         "ghost": ">=5.0.0"
     },

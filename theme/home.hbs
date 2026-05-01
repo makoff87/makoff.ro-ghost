@@ -90,50 +90,53 @@
 
 <div class="home-shell">
   <div class="desktop">
-
-    <a class="folder" id="folder-abonare" style="top:60%;left:8%" href="{{@site.url}}/#/portal/signup/free" onclick="window.location.href=(window.location.origin + '/#/portal/signup/free'); return false;">
-      <div class="emoji">📁</div>
-      <div class="label">abonare</div>
-    </a>
-    
-    <a class="folder" style="top:72%;left:40%" href="/stefan-mako/" data-feature="despre">
-      <div class="emoji">📁</div>
-      <div class="label">despre</div>
-    </a>
-
-    <a class="folder" style="top:56%;left:62%" href="/carti/" data-feature="muzici">
-      <div class="emoji">📁</div>
-      <div class="label">cărți</div>
-    </a>
-
-    <a class="folder" style="top:35%;left:8%" href="/sustine/" data-feature="sustine">
-      <div class="emoji">📁</div>
-      <div class="label">susține-mă</div>
-    </a>
-    <a class="folder" style="top:72%;left:8%" href="/scris/">
-      <div class="emoji">📁</div>
-      <div class="label">scris</div>
-    </a>
-
     <a
       class="folder"
       id="folder-inspatiu"
-      style="top:24%;left:48%"
-      href="https://www.makoff.ro/in-spatiu/"
+      style="top:30%;left:42%"
+      href="/despre-isnan/"
       data-feature="inSpatiu"
     >
       <div class="emoji">📁</div>
       <div class="label">în spațiu nu se aude nimic</div>
     </a>
-  
-    <a class="folder" style="top:48%;left:18%" href="/cealalta-viata/" data-feature="celalaltaViata">
+
+    <a class="folder" style="top:58%;left:54%" href="/sustine/" data-feature="sustine">
       <div class="emoji">📁</div>
-      <div class="label">cealaltă viață</div>
+      <div class="label">susține munca mea</div>
     </a>
 
-    <a class="folder" style="top:36%;left:72%" href="/mens-sana-corpore-sano/" data-feature="mensSanaCorporeSano">
-      <div class="emoji">📁</div>
-      <div class="label">MENS SANA/CORPORE SANO</div>
-    </a>
+    {{!-- Temporarily paused desktop folders. Keep them here so they can be restored later. --}}
+    <div hidden>
+      <a class="folder" id="folder-abonare" style="top:60%;left:8%" href="{{@site.url}}/#/portal/signup/free" onclick="window.location.href=(window.location.origin + '/#/portal/signup/free'); return false;">
+        <div class="emoji">📁</div>
+        <div class="label">abonare</div>
+      </a>
+
+      <a class="folder" style="top:72%;left:40%" href="/stefan-mako/" data-feature="despre">
+        <div class="emoji">📁</div>
+        <div class="label">despre</div>
+      </a>
+
+      <a class="folder" style="top:56%;left:62%" href="/carti/" data-feature="muzici">
+        <div class="emoji">📁</div>
+        <div class="label">cărți</div>
+      </a>
+
+      <a class="folder" style="top:72%;left:8%" href="/scris/">
+        <div class="emoji">📁</div>
+        <div class="label">scris</div>
+      </a>
+
+      <a class="folder" style="top:48%;left:18%" href="/cealalta-viata/" data-feature="celalaltaViata">
+        <div class="emoji">📁</div>
+        <div class="label">cealaltă viață</div>
+      </a>
+
+      <a class="folder" style="top:36%;left:72%" href="/mens-sana-corpore-sano/" data-feature="mensSanaCorporeSano">
+        <div class="emoji">📁</div>
+        <div class="label">MENS SANA/CORPORE SANO</div>
+      </a>
+    </div>
   </div>
 </div>
